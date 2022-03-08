@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:suezcanal/home_screen.dart';
 import 'package:suezcanal/widget/custom_button.dart';
@@ -23,17 +24,22 @@ class _LoginScreenState extends State<LoginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CustomTextForm(
-                 textType: TextInputType.number,
+                 textType: TextInputType.text,
                   text: 'كلمه السر ؟',
                   icon: const Icon(Icons.lock,),
                 controller: controllerPassword,),
               CustomButton(
                   width: 150,
                   onPress: (){
-                    Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const HomeScreen()),
-                  );
+                    if(controllerPassword.text.contains('Suezcanal2022@')) {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomeScreen()),
+                      );
+                    }else{
+                      _showErrorDialog("كلمة المرور خاطئة", "تسجيل الدخول");
+                    }
                   },
                   icon: const Icon(Icons.login),
                   text: const Text('تسجيل الدخول'))
@@ -43,5 +49,19 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  void _showErrorDialog(String message, String title) {
+    AwesomeDialog(
+        context: context,
+        dialogType: DialogType.ERROR,
+        animType: AnimType.RIGHSLIDE,
+        headerAnimationLoop: true,
+        title: title,
+        desc: message,
+        btnOkOnPress: () {},
+        btnOkIcon: Icons.cancel,
+        btnOkColor: Colors.red)
+        .show();
   }
 }

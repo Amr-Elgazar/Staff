@@ -203,14 +203,14 @@ class _UpdateScreenState extends State<UpdateScreen> {
       }else{
         Staff2 _staff = Staff2(
             name: controllerName.text,
-            phone: controllerPhone.text,
+            phone:  controllerPhone.text,
             image: base64 ?? '',
             generalSpecialty: controllerGeneralSpecialty.text,
             specialization: controllerSpecialization.text,
             masterDHistory: controllerMasterDHistory.text,
             phDHistory: controllerPhDHistory.text,
             universityName: controllerUniversityName.text);
-        StaffData().updateStaffNewPhone(staff: _staff).then((value) {
+        StaffData().updateStaffNewPhone(staff: _staff , newPhone:widget.staff.phone).then((value) {
           print(value);
           if (value == 'phone exist') {
             print(value);

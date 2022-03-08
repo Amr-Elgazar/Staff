@@ -54,10 +54,11 @@ class StaffData {
 
   }
 
-  Future<String?> updateStaffNewPhone({required Staff2 staff}) async {
+  Future<String?> updateStaffNewPhone({required Staff2 staff , required newPhone}) async {
     String baseUrl = root + 'user.php';
     var map = {
       'action': 'UPDATE_USER_PHONE',
+      'oldPhone' : newPhone,
       'name': staff.name,
       'phone': staff.phone,
       'image': staff.image,

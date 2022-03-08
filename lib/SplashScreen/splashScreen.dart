@@ -12,12 +12,15 @@ class splashScreen extends StatefulWidget {
 }
 
 class _splashScreenState extends State<splashScreen> {
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: AnimatedSplashScreen(
         duration: 5000,
-        nextScreen:LoginScreen(),
+        nextScreen:const LoginScreen(),
         splash: Image.asset('assets/Logo.png'),
         splashTransition: SplashTransition.scaleTransition,
         splashIconSize: 200.0,
