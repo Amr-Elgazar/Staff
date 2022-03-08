@@ -11,6 +11,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController controllerPassword = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Directionality(
@@ -24,16 +25,18 @@ class _LoginScreenState extends State<LoginScreen> {
               CustomTextForm(
                  textType: TextInputType.number,
                   text: 'كلمه السر ؟',
-                  icon: Icon(Icons.lock,)),
+                  icon: const Icon(Icons.lock,),
+                controller: controllerPassword,),
               CustomButton(
                   width: 150,
-                  onPress: (){Navigator.push(
+                  onPress: (){
+                    Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const HomeScreen()),
                   );
                   },
-                  icon: Icon(Icons.login),
-                  text: Text('تسجيل الدخول'))
+                  icon: const Icon(Icons.login),
+                  text: const Text('تسجيل الدخول'))
 
             ],
           ),
