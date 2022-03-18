@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:suezcanal/Api/staff.dart';
@@ -65,7 +66,7 @@ class _UpdateScreenState extends State<UpdateScreen> {
                     ),
                     CircleAvatar(
                       child: IconButton(
-                        onPressed: () => chooseImage(),
+                        onPressed: () => Platform.isWindows || Platform.isLinux || Platform.isMacOS ? chooseImageDesktop() : chooseImage(),
                         icon: const Icon(Icons.edit),
                       ),
                     )
@@ -147,6 +148,20 @@ class _UpdateScreenState extends State<UpdateScreen> {
       try {
         setState(() {
           File file = File(pickedFile!.path);
+          base64 = base64Encode(file.readAsBytesSync()).toString();
+        });
+      } catch (e) {
+        print(e);
+      }
+    });
+  }
+
+  void chooseImageDesktop() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles();
+    setState(() {
+      try {
+        setState(() {
+          File file = File(result!.files.single.path!);
           base64 = base64Encode(file.readAsBytesSync()).toString();
         });
       } catch (e) {
